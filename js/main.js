@@ -5,18 +5,20 @@ function main () {
     var ctx = canvas.getContext('2d');
     let w = canvas.clientWidth;
     let h = canvas.clientHeight;
+    let r = 50
 
     let body = document.getElementById("body");
 
     let circulos = new Array();
-    let color = "#3498db";
+    let color = '#'+Math.floor(Math.random()*16777215).toString(16);
+
 
     canvas.addEventListener("mousedown", cambiarTamaño);
     canvas.addEventListener("mousemove", mostrarCoordenadas);
     body.addEventListener("keydown", moverCirculos);
 
     function mostrarCoordenadas (e) {
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = "green";
         ctx.lineWidth = 10;
         ctx.clearRect(10, h - 30, w - 10, h);
         ctx.fillText("El mouse esta en x:" + e.clientX + " y: " + e.clientY, 20, h-20);
@@ -54,19 +56,18 @@ function main () {
                 for (let i = 0; i < circulos.length; i++) {
                     circulos[i].agrandar();
                 }
-                ctx.fillText(" El mouse está en la x: " + e.clientX, 50, 200);
                 break;
 
-            case 1 : 
+            case 2 : 
                 for (let i = 0; i < circulos.length; i++) {
                     if (circulos[i].radio > 10) {
                         circulos[i].reducir();
                     }
                 }break;
 
-            case 2 :
-                colorRelleno = "rgb(" + circulos.length*10%256 + ",100,100)";
-                circulos.push (new circulo(50, e.clienteX, e.clientY, undefined, color));
+            case 1 :
+                color = '#'+Math.floor(Math.random()*16777215).toString(16);
+                circulos.push (new circulo(e.clientX, e.clientY, r, color));
                 document.getElementById("tecla").value = circulos.length;
                 break;
         }
@@ -74,4 +75,16 @@ function main () {
             circulos[i].dibujar(ctx);
         }
     }
+    
+    function agrandar() {
+        r = r+5;
+    }
+    function reducir() {
+        if (r > 10) {
+            r = r-5; 
+        }
+    }
+
+    document.getElementById("boton5").onclick = agrandar;
+    document.getElementById("boton6").onclick = reducir;
 }

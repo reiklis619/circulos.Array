@@ -11,12 +11,12 @@ class circulo {
         this.#colorRelleno = color;
     }
     
-    dibujar(ctx) {
-        ctx.beginPath();
-        ctx.arc(this.#x1,this.#y1,this.#r,0,2*Math.PI);
-        ctx.fillStyle = this.#colorRelleno;
-        ctx.closePath();
-        ctx.fill(); 
+    dibujar(contexto) {
+        contexto.beginPath();
+        contexto.arc(this.#x1,this.#y1,this.#r,0,2*Math.PI);
+        contexto.fillStyle = this.#colorRelleno;
+        contexto.closePath();
+        contexto.fill(); 
     }
 
     agrandar () {
